@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Show the number of people fully vaccinated and partially vaccinated",
+  "title": "Share of people vaccinated against COVID-19, Sep 11, 2023 in each continent",
+  "width": 800,
+  "height": 300,
+  "data": {
+    "values": [
+      {"percentage": 3.99, "continent": "Europe", "year": 1931, "status": "people vaccinated", "total percentage": 70.19},
+      {"percentage": 66.2, "continent": "Europe", "year": 1931, "status": "people fully vaccinated", "total percentage": 70.19},
+      {"percentage": 78.04, "continent": "Asia", "year": 1931, "status": "people fully vaccinated", "total percentage": 82.83},
+      {"percentage": 4.79, "continent": "Asia", "year": 1931, "status": "people vaccinated", "total percentage": 82.83},
+      {"percentage": 38.63, "continent": "Africa", "year": 1931, "status": "people fully vaccinated", "total percentage": 45.13},
+      {"percentage": 6.5, "continent": "Africa", "year": 1931, "status": "people vaccinated", "total percentage": 45.13},
+      {"percentage": 2.21, "continent": "Oceania", "year": 1931, "status": "people vaccinated", "total percentage": 66.51},
+      {"percentage": 64.3, "continent": "Oceania", "year": 1931, "status": "people fully vaccinated", "total percentage": 66.51},
+      {"percentage": 65.7, "continent": "North America", "year": 1931, "status": "people fully vaccinated", "total percentage": 76.83},
+      {"percentage": 10.68, "continent": "North America", "year": 1931, "status": "people vaccinated", "total percentage": 76.83},
+      {"percentage": 77.13, "continent": "South America", "year": 1931, "status": "people fully vaccinated", "total percentage": 85.94},
+      {"percentage": 8.81, "continent": "South America", "year": 1931, "status": "people vaccinated", "total percentage": 85.94}
+    ]
+  },
+  "params": [
+    {
+    "name": "Continent_selection",
+    "bind": {
+    "input": "select",
+    "options": [
+    null,
+    "people vaccinated",
+    "people fully vaccinated"
+    ],
+    "labels":[
+    "people fully vaccinated and people vaccinated",
+    "people vaccinated",
+    "people fully vaccinated"
+    ],
+    "name": "partially vaccinated and fully vaccinated: "
+    }
+    }
+    ],
+  "transform": [
+    {"filter": "Continent_selection == null || datum.status == Continent_selection"}],
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "x": {"aggregate": "sum", "field": "percentage", "title": "Percentage", "scale": {"domainMax": 100}},
+        "y": {"field": "continent"},
+        "color": {"field": "status"},
+        "tooltip": [
+          {"field": "percentage", "type": "quantitative"},
+          {"field": "status", "type": "nominal"},
+          {"field": "total percentage", "type": "quantitative"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "red", "strokeDash": [5, 5]},
+      "encoding": {"x": {"value": 400}}
+    }
+  ]
+}

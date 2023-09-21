@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "History of vaccination in each continent",
+  "width": 1150, "height": 560,
+  "description": "Show the history of vaccination for each continent",
+  "layer": [
+    {
+  "data": {"url": "./data/vaccination_continent_only.csv"},
+  "mark": {
+    "type": "line"
+  },
+  "transform": [
+  {"calculate": "datetime(datum.date)", "as": "convertedDate"},
+  {
+    "calculate": "utcFormat(datum.date,'%B %d, %Y')",
+    "as": "converted as string"
+  }],
+  "params":[
+    {
+    "name": "continent_highlight",
+    "select": {"type": "point", "fields": ["location"]},
+    "bind": "legend"
+    }
+    ],    
+  "encoding": {
+    "x": {"timeUnit": "yearmonthdate", "field": "date", "type": "ordinal"},
+    "y": {"field": "total_vaccinations_per_hundred", "type": "quantitative", "title":"Total vaccination per hundred"},
+    "color": {"field": "location", "type": "nominal"},
+    "tooltip": [
+      {"field": "converted as string", "type": "ordinal", "title":"date"},
+      {"field": "location", "type": "nominal"},
+      {"field": "total_vaccinations_per_hundred", "type": "quantitative", "title": "vaccination per hundred"}
+    ],
+    "opacity": {
+      "condition": {"param": "continent_highlight", "value": 1.6},
+      "value": 0.1
+      }   
+  } 
+    },{
+      "data": {"values": [{"y": 200, "text": "Fully vaccinated threshold"}]}, 
+      "mark": {"type": "text", "baseline": "middle", "dx": -150, "dy": -15},
+      "encoding": {"y": {"field": "y", "type": "quantitative"}, "text": {"field": "text"}}
+    },
+    {
+      "data": {"values": [{"y": 200, "text": "Y-Axis Annotation"}]},
+      "mark": {"type": "rule", "strokeWidth": 2}, 
+      "encoding": {"y": {"field": "y", "type": "quantitative"}}
+    }
+  ]
+}

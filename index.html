@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="./javascript/vega.js"></script>
+  <script src="./javascript/vegalite.js"></script>
+  <script src="./javascript/vegaembed.js"></script>
+  
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="cascadingsheetstyle/styles.css" media="all">
+  <title>Vaccination Investigation</title>
+  <link rel="icon" type="image/x-icon" href="/images/syringe-svgrepo-com.svg">
+
+</head>
+<body>
+
+  <div style="text-align: center;">
+   <h1 style="font-family:verdana", class="shadow-typo">Vaccination Investigation</h1>
+   <p>Assignment 2</p>
+  </div>
+
+  
+  <h2>How many vaccine doses have been administered in total?</h2>
+  <h2>Map for vaccination per hundred people for each country</h2>
+  <p>The following map and chart show the <span class="text">number of vaccine doses administered per 100 people</span> within a given population. All doses, including boosters, are counted individually.
+  Two different colour intensities are used because 200 is a threshold value means that on average everyone has <span class="text">fully vaccinated.</span>
+  From another point of view countries that has more than 200 vaccinations per hundred people is guaranteed to have booster population.
+  Hover on it to see the exact figure and the last update date
+  Intresting to point out that vaccination distrbution are unequal, some countries has much more larger vaccinated population some has lesser.</p>
+  
+<div id="choropleth_map"></div>
+
+<script type="text/javascript">
+
+  var spec2 = "vega/choropleth_map.vg.json";
+  vegaEmbed('#choropleth_map', spec2).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+</script>
+
+  <pre>
+  
+
+
+
+
+  </pre>
+  
+  <h2>What share of the population has received at least one dose, and completed the initial vaccination protocol?</h2>
+  <p>The following charts show the breakdown of people vaccinated, between those who have received only their <span class="text">first vaccine dose</span>, and those who have completed the <span class="text">initial vaccination protocol</span> (2 doses for most vaccines, 1 or 3 for a few manufacturers).</p>
+  
+<div class="container">
+  <div id="stacked_bar_chart"></div>
+  <div class="text-image-group">
+    <p class="align">Hover on it to see the exact value for the<span class="text"> total percentage,  vaccinated  and         fully  vaccinated of each continent</span>. A filter is located below to compare<span class="text"> partially and fully vaccinated </span> population. From the visualisation we can quickly know that south america has the most vaccinated population followed by Asia , North America, Europe, Oceania and Africa. Intresting to point out that Africa is the only continent that has fewer than <span class="text">50% fully vaccinated population</span>.</p>
+    <img src="images/second-vaccine_B-300x158.jpg" width="425" height="230">
+  </div>
+</div>
+
+<pre>
+
+
+
+</pre>
+<h2>What is the speed of vaccination for each continent?</h2>
+<p>The following line charts show the breakdown of people vaccinated per hundred for each continent, calculated by taking the number of total vaccination of countries by each continent and divided by their total population.
+We can see clearly that Africa falls behind significantly.
+Hover on it to try to see the <span class="text">date and exact number</span>. Also try to click on the legend to highlight continent.
+Intresting to point out that South America has the highest average of vaccination and also the only continent that has surpassed the <span class="text">fully vaccinatied threshold</span>.
+However from the stacked bar chart above South America has fewer than 100 percent <span class="text">fully vaccinated population</span> this means that it has a large portion of booster population. </p>
+<script type="text/javascript">
+
+    var spec3 = "vega/stacked_bar_chart.vg.json";
+    vegaEmbed('#stacked_bar_chart', spec3).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+</script>
+
+<div id="line_chart"></div>
+
+<script type="text/javascript">
+
+    var spec4 = "vega/line_chart.vg.json";
+    vegaEmbed('#line_chart', spec4).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+</script>
+
+
+<pre>
+  
+
+
+
+
+
+
+
+
+
+
+</pre>
+<h2>Which brands of vaccine has the largest receivers ? How about the percentage of receivers of other brands of vaccination ?</h2>
+
+
+
+ 
+<script type="text/javascript">
+
+    var spec4 = "vega/stacked_area_chart.vg.json";
+    vegaEmbed('#stacked_area_chart', spec4).then(function(result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+
+</script>
+
+
+<div class="container2">
+  <div class="text-container">
+    <div class="text-image-group">
+      <p class="align">From the pie chart on the right side, it is large enough to see the area of each brand clearly so that we can hover on it easily to find out the exact percentage of each vaccine.
+        This shows which vaccinae is more popular among mankind.
+        The three most popular is Pfizer/BioNTech followed by Moderna, Oxford/AstraZeneca with <span class="text">63%, 20% and 7% </span> 
+        .Note that Valneva Novavax Skycovion Sanofi Covaxin Medicago and cansino vaccine are not shown due to too few percentage they all have 0 percent of receiver when fitting into the pie chart.
+        Hover on it to see the exact percentage.
+      </p>
+      <img src="images/6LRE3QLXKZOSFKZZIO2U4BYEXE.jpg"  width="700" height="466">
+    </div>
+  </div>
+  <div id="stacked_area_chart"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

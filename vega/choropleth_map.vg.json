@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Total COVID-19 vaccine doses administered per 100 people, Sep 11, 2023",
+  "width": 1000,
+  "height": 600,
+  "description": "Show the average number of vaccination for each country",
+  "projection": {"type": "equalEarth"},
+  "data": {
+    "url": "./map/ne_110m_admin_0_countries.topojson",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+  },
+  "mark": {"type": "geoshape"},
+  "transform": [
+    {
+      "lookup": "properties.NAME",
+      "from": {
+        "data": {
+          "url": "./data/vaccination_per_hundred_people_in_each_country.csv"
+        },
+        "key": "Country",
+        "fields": ["Number", "date"]
+      }
+    },
+    {
+      "calculate": "toDate(datum.date, '%m/%d/%Y')",
+      "as": "convertedDate"
+    },
+    {
+      "calculate": "utcFormat(datum.convertedDate, '%B %d, %Y')",
+      "as": "formattedDate"
+    }
+  ],
+  "encoding": {
+    "color": {
+      "field": "Number",
+      "type": "quantitative",
+      "scale": {
+        "type": "threshold",
+        "domain": [50, 100, 150, 200, 250, 300, 350],
+        "range": ["#dfe0f7", "#abaff5", "#4e56ed", "#050a59", "#81a641", "#6a9422", "#385408", "#1a2901"]
+      }
+    },
+    "tooltip": [
+      {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+      {"field": "Number", "type": "quantitative"},
+      {"field": "formattedDate", "type": "ordinal", "title": "Last Updated"}
+    ]
+  }
+}

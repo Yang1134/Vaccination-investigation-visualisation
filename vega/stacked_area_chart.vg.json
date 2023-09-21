@@ -1,0 +1,66 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "COVID-19 vaccine doses administered by manufacturer",
+  "description": "Show the shares of each brand of vaccine administered",
+  "data": {"url": "./data/covid-vaccine-doses-by-manufacturer.csv"},
+  "transform": [
+    {
+      "fold": [
+        "Pfizer/BioNTech",
+        "Moderna",
+        "Oxford/AstraZeneca",
+        "Johnson&Johnson",
+        "Sputnik V",
+        "Sinovac",
+        "Sinopharm/Beijing"
+        
+        
+        
+        
+        
+        
+        
+      ],
+      "as": ["key", "value"]
+    },
+    {
+      "calculate": "indexof(['Pfizer/BioNTech', 'Sputnik V', 'Moderna', 'Oxford/AstraZeneca', 'Johnson&Johnson', 'Sinovac', 'Sinopharm/Beijing'], datum.key)",
+      "as": "sort_order"
+    },
+    {
+      "lookup": "key",
+      "from": {
+        "data": {
+          "values": [
+            {"key": "Pfizer/BioNTech", "sort_order": 0},
+            {"key": "Sputnik V", "sort_order": 1},
+            {"key": "Moderna", "sort_order": 2},
+            {"key": "Oxford/AstraZeneca", "sort_order": 3},
+            {"key": "Johnson&Johnson", "sort_order": 4},
+            {"key": "Sinovac", "sort_order": 5},
+            {"key": "Sinopharm/Beijing", "sort_order": 6}
+          ]
+        },
+        "key": "key",
+        "fields": ["sort_order"]
+      },
+      "as": "sorted"
+    }
+  ],
+  "encoding": {
+    "theta": {"field": "value", "type": "quantitative", "stack": "normalize", "aggregate": "sum"},
+    "color": {"field": "sorted", "type": "nominal", "legend": null}
+  },
+  "layer": [
+    {
+      "mark": {"type": "arc", "outerRadius": 270, "tooltip": true}
+    },
+    {
+  
+      "mark": {"type": "text", "radius": 330},
+      "encoding": {
+        "text": {"field": "key", "type": "nominal"}
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+#choropleth_map {
+	top:75px;
+	left: 150px;
+	right: 100px;
+	/*height: 1000px;
+	width: 800px;*/
+	
+
+}
+
+.align{
+	text-align: justify;
+} 
+
+.text {
+	font-weight: bold;
+}
+
+.shadow-typo {
+	position: relative;
+	display: inline-block;
+	font-size: 3rem;
+	text-transform: uppercase;
+	text-shadow: 3px 3px 0px #e7eef1, 8px 8px 0px rgba(0,0,0,0.1)
+}
+
+#stacked_bar_chart {
+	top:50px;
+	left: 1px;
+	/*height: 1000px;
+	width: 800px;*/
+
+}
+
+
+.container {
+	display: flex;
+	
+  }
+
+
+.container2 {
+	display: flex;
+  }
+  
+.text-container {
+	flex: 1;
+	padding-right: 20px; /* Add spacing between text and chart */
+  }
+  
+
+#line_chart{
+	top:75px;
+	bottom: 800px; 
+	left: 100px;
+	/*height: 1000px;
+	width: 800px;*/
+
+}
+
+
+body{
+	background-color: aquamarine;
+}
